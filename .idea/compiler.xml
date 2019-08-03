@@ -6,7 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dis-seckill" />
+        <module name="dis-seckill-common" />
+        <module name="dis-seckill-gateway" />
+        <module name="dis-seckill-goods" />
+        <module name="dis-seckill-order" />
+        <module name="dis-seckill-user" />
       </profile>
     </annotationProcessing>
   </component>

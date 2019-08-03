@@ -5,6 +5,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/dis-seckill-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/dis-seckill-user/pom.xml" />
       </list>
     </option>
   </component>
