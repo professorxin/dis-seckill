@@ -12,10 +12,11 @@ import com.lzx.common.domain.SeckillOrder;
 import com.lzx.common.domain.SeckillUser;
 import com.lzx.common.util.MD5Util;
 import com.lzx.common.util.UUIDUtil;
-import jdk.nashorn.internal.ir.annotations.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.script.ScriptEngine;
@@ -29,7 +30,8 @@ public class SeckillServiceImpl implements SeckillServiceApi {
 
     private static final Logger log = LoggerFactory.getLogger(SeckillServiceImpl.class);
 
-    @Reference
+    //@Reference   报空指针异常
+    @Autowired
     private GoodsServiceApi goodsServiceApi;
 
     @Reference

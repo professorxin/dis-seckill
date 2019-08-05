@@ -213,7 +213,7 @@ public class SeckillController implements InitializingBean {
         // 创建验证码
         try {
             VerifyCodeVo verifyCodeVo = VerifyCodeUtil.createVerifyCode();
-            log.info("验证码对象计算的值：{}" + verifyCodeVo.getExpResult());
+            //log.info("验证码对象计算的值：{}" + verifyCodeVo.getExpResult());
             //验证码结果存在redis中
             redisServiceApi.set(SeckillKeyPrefix.seckillVerifyCode,
                     user.getId() + "_" + goodsId, verifyCodeVo.getExpResult());
@@ -245,7 +245,7 @@ public class SeckillController implements InitializingBean {
 
         // 从redis中获取验证码计算结果
         Integer oldCode = redisServiceApi.get(SeckillKeyPrefix.seckillVerifyCode, user.getId() + "_" + goodsId, Integer.class);
-        log.info("redis存储的计算结果：{},手动输入的计算结果：{}", oldCode, verifyCode);
+        //log.info("redis存储的计算结果：{},手动输入的计算结果：{}", oldCode, verifyCode);
         if (oldCode == null || oldCode - verifyCode != 0) {// !!!!!!
             return false;
         }
