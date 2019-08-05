@@ -1,7 +1,7 @@
 package com.lzx.common.api.goods.vo;
 
 
-import com.lzx.seckill.domain.SeckillUser;
+import com.lzx.common.domain.SeckillUser;
 
 public class GoodDetailVo {
 

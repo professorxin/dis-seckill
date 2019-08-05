@@ -1,8 +1,9 @@
 package com.lzx.gateway.exception;
 
 
-import com.lzx.seckill.result.CodeMsg;
-import com.lzx.seckill.result.Result;
+import com.lzx.common.result.CodeMsg;
+import com.lzx.common.result.Result;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -17,7 +18,6 @@ import java.util.List;
 /**
  * 全局异常处理器（和AOP一样）
  * 在异常发生时，会调用里面的方法给客户端响应
- * //todo 只拦截Controller发生的异常？？
  */
 @ControllerAdvice
 @ResponseBody

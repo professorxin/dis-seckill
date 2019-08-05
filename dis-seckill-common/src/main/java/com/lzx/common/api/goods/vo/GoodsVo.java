@@ -1,6 +1,7 @@
 package com.lzx.common.api.goods.vo;
 
-import com.lzx.seckill.domain.Goods;
+import com.lzx.common.domain.Goods;
+
 
 import java.util.Date;
 

@@ -1,24 +1,24 @@
 package com.lzx.gateway.seckill;
 
 
-import com.lzx.seckill.access.AccessLimit;
-import com.lzx.seckill.domain.OrderInfo;
-import com.lzx.seckill.domain.SeckillOrder;
-import com.lzx.seckill.domain.SeckillUser;
-import com.lzx.seckill.rabbitmq.MQSender;
-import com.lzx.seckill.rabbitmq.SeckillMessage;
-import com.lzx.seckill.redis.GoodsKeyPrefix;
-import com.lzx.seckill.redis.RedisService;
-import com.lzx.seckill.result.CodeMsg;
-import com.lzx.seckill.result.Result;
-import com.lzx.seckill.service.GoodsService;
-import com.lzx.seckill.service.OrderService;
-import com.lzx.seckill.service.SeckillService;
-import com.lzx.seckill.vo.GoodsVo;
+import com.lzx.common.api.cache.RedisServiceApi;
+import com.lzx.common.api.cache.vo.GoodsKeyPrefix;
+import com.lzx.common.api.goods.GoodsServiceApi;
+import com.lzx.common.api.goods.vo.GoodsVo;
+import com.lzx.common.api.mq.MqProviderApi;
+import com.lzx.common.api.mq.vo.SeckillMessage;
+import com.lzx.common.api.order.OrderServiceApi;
+import com.lzx.common.api.seckill.SeckillServiceApi;
+import com.lzx.common.domain.OrderInfo;
+import com.lzx.common.domain.SeckillOrder;
+import com.lzx.common.domain.SeckillUser;
+import com.lzx.common.result.CodeMsg;
+import com.lzx.common.result.Result;
+import com.lzx.gateway.config.access.AccessLimit;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,20 +37,20 @@ public class SeckillController implements InitializingBean {
 
     private Logger log = LoggerFactory.getLogger(SeckillController.class);
 
-    @Autowired
-    private GoodsService goodsService;
+    @Reference
+    private GoodsServiceApi goodsServiceApi;
 
-    @Autowired
-    private OrderService orderService;
+    @Reference
+    private OrderServiceApi orderServiceApi;
 
-    @Autowired
-    private SeckillService seckillService;
+    @Reference
+    private SeckillServiceApi seckillServiceApi;
 
-    @Autowired
-    private RedisService redisService;
+    @Reference
+    private RedisServiceApi redisServiceApi;
 
-    @Autowired
-    private MQSender mqSender;
+    @Reference
+    private MqProviderApi mqProviderApi;
 
     //内存标记，标记库存是否为空，减少redis的访问
     private Map<Long, Boolean> localOverMap = new HashMap<>();
@@ -63,12 +63,12 @@ public class SeckillController implements InitializingBean {
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        List<GoodsVo> goodsVos = goodsService.listGoodsVo();
+        List<GoodsVo> goodsVos = goodsServiceApi.listGoodsVo();
         if (goodsVos == null) {
             return;
         }
         for (GoodsVo goodsVo : goodsVos) {
-            redisService.set(GoodsKeyPrefix.seckillGoodsStock, "" + goodsVo.getId(),
+            redisServiceApi.set(GoodsKeyPrefix.seckillGoodsStock, "" + goodsVo.getId(),
                     goodsVo.getStockCount());
             localOverMap.put(goodsVo.getId(), false);
         }
@@ -90,21 +90,21 @@ public class SeckillController implements InitializingBean {
         }
         model.addAttribute("user", user);
         //判断是否还有秒杀库存
-        GoodsVo goods = goodsService.getGoodsVoById(goodsId);
+        GoodsVo goods = goodsServiceApi.getGoodsVoById(goodsId);
         int stockCount = goods.getStockCount();
         if (stockCount <= 0) {
             model.addAttribute("errmsg", CodeMsg.SECKILL_OVER.getMsg());
             return "seckill_fail";
         }
         //判断是否重复下单
-        SeckillOrder seckillOrder = orderService.getSeckillOrderByUserIdAndGoodsId(user.getId(), goodsId);
+        SeckillOrder seckillOrder = orderServiceApi.getSeckillOrderByUserIdAndGoodsId(user.getId(), goodsId);
         //log.info("判断是否重复下单" + seckillOrder.toString());
         if (seckillOrder != null) {
             model.addAttribute("errmsg", CodeMsg.REPEATE_SECKILL.getMsg());
             return "seckill_fail";
         }
         //减库存，下订单，写入秒杀订单表
-        OrderInfo orderInfo = seckillService.seckill(user, goods);
+        OrderInfo orderInfo = seckillServiceApi.seckill(user, goods);
         //log.info(orderInfo.toString());
         model.addAttribute("orderInfo", orderInfo);
         model.addAttribute("goods", goods);
@@ -122,7 +122,7 @@ public class SeckillController implements InitializingBean {
         }
 
         //验证path是否正确
-        boolean check = seckillService.checkPath(user, goodsId, path);
+        boolean check = seckillServiceApi.checkPath(user, goodsId, path);
         if (!check)
             return Result.error(CodeMsg.REQUEST_ILLEGAL);// 请求非法
 
@@ -131,13 +131,13 @@ public class SeckillController implements InitializingBean {
         if (over) {
             return Result.error(CodeMsg.SECKILL_OVER);
         }
-        Long stock = redisService.decr(GoodsKeyPrefix.seckillGoodsStock, "" + goodsId);
+        Long stock = redisServiceApi.decr(GoodsKeyPrefix.seckillGoodsStock, "" + goodsId);
         if (stock < 0) {
             localOverMap.put(goodsId, true);
             return Result.error(CodeMsg.SECKILL_OVER);
         }
         //判断是否重复下单
-        SeckillOrder seckillOrder = orderService.getSeckillOrderByUserIdAndGoodsId(user.getId(), goodsId);
+        SeckillOrder seckillOrder = orderServiceApi.getSeckillOrderByUserIdAndGoodsId(user.getId(), goodsId);
         if (seckillOrder != null) {
             return Result.error(CodeMsg.REPEATE_SECKILL);
         }
@@ -145,7 +145,7 @@ public class SeckillController implements InitializingBean {
         seckillMessage.setUser(user);
         seckillMessage.setGoodsId(goodsId);
 
-        mqSender.sendSeckillMsg(seckillMessage);
+        mqProviderApi.sendSeckillMsg(seckillMessage);
         return Result.success(0);//0表示排队中
 
 /*        //判断是否还有秒杀库存
@@ -171,7 +171,7 @@ public class SeckillController implements InitializingBean {
         if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
-        long result = seckillService.getSeckillResult(user.getId(), goodsId);
+        long result = seckillServiceApi.getSeckillResult(user.getId(), goodsId);
         return Result.success(result);
     }
 
@@ -186,7 +186,7 @@ public class SeckillController implements InitializingBean {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
         // 获取秒杀路径
-        String path = seckillService.createSeckillPath(user, goodsId);
+        String path = seckillServiceApi.createSeckillPath(user, goodsId);
         // 向客户端回传随机生成的秒杀地址
         return Result.success(path);
     }
@@ -201,7 +201,7 @@ public class SeckillController implements InitializingBean {
 
         // 创建验证码
         try {
-            BufferedImage image = seckillService.createVerifyCode(user, goodsId);
+            BufferedImage image = seckillServiceApi.createVerifyCode(user, goodsId);
             ServletOutputStream out = response.getOutputStream();
             // 将图片写入到resp对象中
             ImageIO.write(image, "JPEG", out);

@@ -1,6 +1,7 @@
 package com.lzx.gateway.config;
 
-import com.lzx.seckill.access.AccessInterceptor;
+import com.lzx.gateway.config.access.AccessInterceptor;
+import com.lzx.gateway.config.resolver.UserArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

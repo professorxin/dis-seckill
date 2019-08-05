@@ -1,6 +1,6 @@
 package com.lzx.gateway.exception;
 
-import com.lzx.seckill.result.CodeMsg;
+import com.lzx.common.result.CodeMsg;
 
 /**
  * 全局异常类

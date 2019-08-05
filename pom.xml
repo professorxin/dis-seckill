@@ -17,6 +17,10 @@
     <module>dis-seckill-goods</module>
     <module>dis-seckill-order</module>
     <module>dis-seckill-common</module>
+      <module>dis-seckill-cache</module>
+    <module>dis-seckill-mq</module>
+      <module>dis-seckill-cache</module>
+    <module>dis-seckill-mq</module>
   </modules>
 
   <parent>

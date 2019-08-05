@@ -1,11 +1,12 @@
 package com.lzx.gateway.user;
 
-import com.lzx.seckill.result.Result;
-import com.lzx.seckill.service.SeckillUserService;
-import com.lzx.seckill.vo.LoginVo;
+import com.lzx.common.api.seckill.SeckillServiceApi;
+import com.lzx.common.api.user.UserServiceApi;
+import com.lzx.common.api.user.vo.LoginVo;
+import com.lzx.common.result.Result;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,8 +20,8 @@ public class LoginController {
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @Autowired
-    private SeckillUserService seckillUserService;
+    @Reference
+    private UserServiceApi userServiceApi;
 
     @RequestMapping("/to_login")
     public String toLogin() {
@@ -31,7 +32,7 @@ public class LoginController {
     @ResponseBody
     public Result<String> doLogin(HttpServletResponse response, @Valid LoginVo loginVo) {
         log.info(loginVo.toString());
-        String token = seckillUserService.login(response, loginVo);
+        String token = userServiceApi.login(response, loginVo);
         return Result.success(token);
     }
 

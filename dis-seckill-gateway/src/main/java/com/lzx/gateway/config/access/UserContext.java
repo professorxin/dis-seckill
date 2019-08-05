@@ -1,6 +1,7 @@
 package com.lzx.gateway.config.access;
 
-import com.lzx.seckill.domain.SeckillUser;
+import com.lzx.common.domain.SeckillUser;
+
 
 public class UserContext {
 

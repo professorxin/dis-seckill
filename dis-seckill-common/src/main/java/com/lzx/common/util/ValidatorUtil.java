@@ -1,6 +1,9 @@
 package com.lzx.common.util;
 
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.regex.Pattern;
 
 public class ValidatorUtil {
 

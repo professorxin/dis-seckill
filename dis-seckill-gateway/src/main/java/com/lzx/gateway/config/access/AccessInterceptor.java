@@ -1,14 +1,14 @@
 package com.lzx.gateway.config.access;
 
 import com.alibaba.fastjson.JSON;
-import com.lzx.seckill.domain.SeckillUser;
-import com.lzx.seckill.redis.AccessKeyPrefix;
-import com.lzx.seckill.redis.RedisService;
-import com.lzx.seckill.result.CodeMsg;
-import com.lzx.seckill.result.Result;
-import com.lzx.seckill.service.SeckillUserService;
+import com.lzx.common.api.cache.RedisServiceApi;
+import com.lzx.common.api.cache.vo.AccessKeyPrefix;
+import com.lzx.common.api.user.UserServiceApi;
+import com.lzx.common.domain.SeckillUser;
+import com.lzx.common.result.CodeMsg;
+import com.lzx.common.result.Result;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -22,11 +22,11 @@ import java.io.OutputStream;
 public class AccessInterceptor extends HandlerInterceptorAdapter {
 
 
-    @Autowired
-    private SeckillUserService userService;
+    @Reference
+    private UserServiceApi userServiceApi;
 
-    @Autowired
-    private RedisService redisService;
+    @Reference
+    private RedisServiceApi redisServiceApi;
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
@@ -51,13 +51,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             // 设置过期时间
             AccessKeyPrefix accessKeyPrefix = AccessKeyPrefix.withExpire(seconds);
             // 在redis中存储的访问次数的key为请求的URI
-            Integer count = redisService.get(accessKeyPrefix, key, Integer.class);
+            Integer count = redisServiceApi.get(accessKeyPrefix, key, Integer.class);
             // 第一次重复点击秒杀
             if (count == null) {
-                redisService.set(accessKeyPrefix, key, 1);
+                redisServiceApi.set(accessKeyPrefix, key, 1);
                 // 点击次数为未达最大值
             } else if (count < maxCount) {
-                redisService.incr(accessKeyPrefix, key);
+                redisServiceApi.incr(accessKeyPrefix, key);
                 // 点击次数已满
             } else {
                 this.render(response, CodeMsg.ACCESS_LIMIT_REACHED);
@@ -88,13 +88,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
     private SeckillUser getUser(HttpServletRequest request, HttpServletResponse response) {
 
         // 从请求中获取token
-        String paramToken = request.getParameter(SeckillUserService.COOKIE_NAME);
-        String cookieToken = getCookieValue(request, SeckillUserService.COOKIE_NAME);
+        String paramToken = request.getParameter(UserServiceApi.COOKIE_NAME);
+        String cookieToken = getCookieValue(request, UserServiceApi.COOKIE_NAME);
         if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
             return null;
         }
         String token = StringUtils.isEmpty(paramToken) ? cookieToken : paramToken;
-        return userService.getByToken(response, token);
+        return userServiceApi.getByToken(response, token);
     }
 
 

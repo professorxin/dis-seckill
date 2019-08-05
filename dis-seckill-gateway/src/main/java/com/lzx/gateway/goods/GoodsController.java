@@ -1,14 +1,15 @@
 package com.lzx.gateway.goods;
 
-import com.lzx.seckill.domain.SeckillUser;
-import com.lzx.seckill.redis.GoodsKeyPrefix;
-import com.lzx.seckill.redis.RedisService;
-import com.lzx.seckill.result.Result;
-import com.lzx.seckill.service.GoodsService;
-import com.lzx.seckill.service.SeckillUserService;
-import com.lzx.seckill.vo.GoodDetailVo;
-import com.lzx.seckill.vo.GoodsVo;
+import com.lzx.common.api.cache.RedisServiceApi;
+import com.lzx.common.api.cache.vo.GoodsKeyPrefix;
+import com.lzx.common.api.goods.GoodsServiceApi;
+import com.lzx.common.api.goods.vo.GoodDetailVo;
+import com.lzx.common.api.goods.vo.GoodsVo;
+import com.lzx.common.api.user.UserServiceApi;
+import com.lzx.common.domain.SeckillUser;
+import com.lzx.common.result.Result;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,14 @@ public class GoodsController {
 
     private Logger log = LoggerFactory.getLogger(GoodsController.class);
 
-    @Autowired
-    private SeckillUserService seckillUserService;
+    @Reference
+    private UserServiceApi userServiceApi;
 
-    @Autowired
-    private GoodsService goodsService;
+    @Reference
+    private GoodsServiceApi goodsServiceApi;
 
-    @Autowired
-    private RedisService redisService;
+    @Reference
+    private RedisServiceApi redisServiceApi;
 
     //视图解析器，用于自定义渲染
     @Autowired
@@ -48,14 +49,14 @@ public class GoodsController {
                          SeckillUser seckillUser) {
 
         //从redis中取出缓存
-        String html = redisService.get(GoodsKeyPrefix.goodsListKeyPrefix, "", String.class);
+        String html = redisServiceApi.get(GoodsKeyPrefix.goodsListKeyPrefix, "", String.class);
         if (!StringUtils.isEmpty(html)) {
             return html;
         }
 
         //如果redis缓存中没有，则手动渲染，并加入缓存
         model.addAttribute("user", seckillUser);
-        List<GoodsVo> goodsList = goodsService.listGoodsVo();
+        List<GoodsVo> goodsList = goodsServiceApi.listGoodsVo();
         model.addAttribute("goodsList", goodsList);
 
         //渲染html
@@ -65,7 +66,7 @@ public class GoodsController {
         html = thymeleafViewResolver.getTemplateEngine().process("goods_list", webContext);
         //加入缓存
         if (!StringUtils.isEmpty(html)) {
-            redisService.set(GoodsKeyPrefix.goodsListKeyPrefix, "", html);
+            redisServiceApi.set(GoodsKeyPrefix.goodsListKeyPrefix, "", html);
         }
         return html;
         //return "goods_list";
@@ -77,13 +78,13 @@ public class GoodsController {
     public String toDetail(HttpServletRequest request, HttpServletResponse response, Model model,
                            SeckillUser seckillUser, @PathVariable("goodsId") Long goodsId) {
         //从redis中取出缓存
-        String html = redisService.get(GoodsKeyPrefix.goodsDetailKeyPrefix, "" + goodsId, String.class);
+        String html = redisServiceApi.get(GoodsKeyPrefix.goodsDetailKeyPrefix, "" + goodsId, String.class);
         if (!StringUtils.isEmpty(html)) {
             return html;
         }
         model.addAttribute("user", seckillUser);
         //log.info(seckillUser.toString());
-        GoodsVo goods = goodsService.getGoodsVoById(goodsId);
+        GoodsVo goods = goodsServiceApi.getGoodsVoById(goodsId);
         //log.info(goods.toString());
         model.addAttribute("goods", goods);
         Long startAt = goods.getStartDate().getTime();
@@ -113,7 +114,7 @@ public class GoodsController {
         html = thymeleafViewResolver.getTemplateEngine().process("good_detail", webContext);
         //加入缓存
         if (!StringUtils.isEmpty(html)) {
-            redisService.set(GoodsKeyPrefix.goodsDetailKeyPrefix, "" + goodsId, html);
+            redisServiceApi.set(GoodsKeyPrefix.goodsDetailKeyPrefix, "" + goodsId, html);
         }
         return html;
         //return "goods_detail";
@@ -124,7 +125,7 @@ public class GoodsController {
     public Result<GoodDetailVo> toDetailStatic(HttpServletRequest request, HttpServletResponse response, Model model,
                                                SeckillUser seckillUser, @PathVariable("goodsId") Long goodsId) {
 
-        GoodsVo goods = goodsService.getGoodsVoById(goodsId);
+        GoodsVo goods = goodsServiceApi.getGoodsVoById(goodsId);
         Long startAt = goods.getStartDate().getTime();
         Long endAt = goods.getEndDate().getTime();
         Long currentAt = System.currentTimeMillis();

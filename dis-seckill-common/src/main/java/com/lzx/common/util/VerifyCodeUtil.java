@@ -1,6 +1,14 @@
 package com.lzx.common.util;
 
 
+import com.lzx.common.api.seckill.vo.VerifyCodeVo;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Random;
+
 public class VerifyCodeUtil {
 
     /**
@@ -10,6 +18,7 @@ public class VerifyCodeUtil {
 
     /**
      * 创建验证码
+     *
      * @return
      */
     public static VerifyCodeVo createVerifyCode() {

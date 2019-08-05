@@ -1,7 +1,8 @@
 package com.lzx.common.api.order.vo;
 
 
-import com.lzx.seckill.domain.OrderInfo;
+import com.lzx.common.api.goods.vo.GoodsVo;
+import com.lzx.common.domain.OrderInfo;
 
 /**
  * 订单详情，包含订单信息和商品信息

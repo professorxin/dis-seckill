@@ -6,8 +6,7 @@ import java.util.Date;
 
 public class SeckillUser implements Serializable{
 
-    private Long uuid;
-    private Long phone;
+    private Long id;
     private String nickname;
     private String password;
     private String salt;
@@ -16,20 +15,12 @@ public class SeckillUser implements Serializable{
     private Date lastLoginDate;
     private Integer loginCount;
 
-    public Long getUuid() {
-        return uuid;
+    public Long getId() {
+        return id;
     }
 
-    public void setUuid(Long uuid) {
-        this.uuid = uuid;
-    }
-
-    public Long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNickname() {
@@ -91,8 +82,7 @@ public class SeckillUser implements Serializable{
     @Override
     public String toString() {
         return "SeckillUser{" +
-                "uuid=" + uuid +
-                ", phone=" + phone +
+                "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
@@ -101,6 +91,5 @@ public class SeckillUser implements Serializable{
                 ", lastLoginDate=" + lastLoginDate +
                 ", loginCount=" + loginCount +
                 '}';
-    }
-}
+    }}
 
