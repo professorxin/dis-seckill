@@ -29,7 +29,6 @@ public class OrderServiceImpl implements OrderServiceApi {
         SeckillOrder seckillOrder = redisServiceApi.get(OrderKeyPrefix.getSeckillOrderByUidGid, "" + id + "_" + goodsId,
                 SeckillOrder.class);
         return  seckillOrder;
-        //return orderDao.getSeckillOrderByUserIdAndGoodsId(id, goodsId);
     }
 
 
