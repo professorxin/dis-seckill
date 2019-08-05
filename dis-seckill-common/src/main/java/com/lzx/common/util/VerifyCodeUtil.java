@@ -91,4 +91,9 @@ public class VerifyCodeUtil {
         String exp = "" + num1 + op1 + num2 + op2 + num3;
         return exp;
     }
+
+    public static void main(String[] args) {
+        VerifyCodeVo verifyCodeVo = VerifyCodeUtil.createVerifyCode();
+        System.out.println(verifyCodeVo.getExpResult());
+    }
 }

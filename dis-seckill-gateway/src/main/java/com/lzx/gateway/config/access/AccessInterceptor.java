@@ -3,6 +3,7 @@ package com.lzx.gateway.config.access;
 import com.alibaba.fastjson.JSON;
 import com.lzx.common.api.cache.RedisServiceApi;
 import com.lzx.common.api.cache.vo.AccessKeyPrefix;
+import com.lzx.common.api.cache.vo.SeckillUserKeyPrefix;
 import com.lzx.common.api.user.UserServiceApi;
 import com.lzx.common.domain.SeckillUser;
 import com.lzx.common.result.CodeMsg;
@@ -94,7 +95,11 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             return null;
         }
         String token = StringUtils.isEmpty(paramToken) ? cookieToken : paramToken;
-        return userServiceApi.getByToken(response, token);
+        SeckillUser seckillUser = redisServiceApi.get(SeckillUserKeyPrefix.token, token, SeckillUser.class);
+        if (seckillUser != null) {
+            addCookie(response, token, seckillUser);
+        }
+        return seckillUser;
     }
 
 
@@ -109,5 +114,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             }
         }
         return null;
+    }
+
+    private void addCookie(HttpServletResponse response, String token, SeckillUser user) {
+        redisServiceApi.set(SeckillUserKeyPrefix.token, token, user);
+        Cookie cookie = new Cookie(UserServiceApi.COOKIE_NAME, token);
+        cookie.setPath("/");
+        cookie.setMaxAge(SeckillUserKeyPrefix.TOKEN_EXPIRE);
+        response.addCookie(cookie);
     }
 }

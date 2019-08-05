@@ -3,17 +3,20 @@ package com.lzx.gateway.seckill;
 
 import com.lzx.common.api.cache.RedisServiceApi;
 import com.lzx.common.api.cache.vo.GoodsKeyPrefix;
+import com.lzx.common.api.cache.vo.SeckillKeyPrefix;
 import com.lzx.common.api.goods.GoodsServiceApi;
 import com.lzx.common.api.goods.vo.GoodsVo;
 import com.lzx.common.api.mq.MqProviderApi;
 import com.lzx.common.api.mq.vo.SeckillMessage;
 import com.lzx.common.api.order.OrderServiceApi;
 import com.lzx.common.api.seckill.SeckillServiceApi;
+import com.lzx.common.api.seckill.vo.VerifyCodeVo;
 import com.lzx.common.domain.OrderInfo;
 import com.lzx.common.domain.SeckillOrder;
 import com.lzx.common.domain.SeckillUser;
 import com.lzx.common.result.CodeMsg;
 import com.lzx.common.result.Result;
+import com.lzx.common.util.VerifyCodeUtil;
 import com.lzx.gateway.config.access.AccessLimit;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
@@ -114,7 +117,7 @@ public class SeckillController implements InitializingBean {
 
     @RequestMapping("/{path}/do_seckill_static")
     @ResponseBody
-    public Result doSeckillStatic(Model model, SeckillUser user,
+    public Result doSeckillStatic(SeckillUser user,
                                   @RequestParam("goodsId") Long goodsId,
                                   @PathVariable("path") String path) {
         if (user == null) {
@@ -180,11 +183,19 @@ public class SeckillController implements InitializingBean {
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
     public Result<String> getSeckillPath(SeckillUser user,
-                                         @RequestParam("goodsId") long goodsId
+                                         @RequestParam("goodsId") long goodsId,
+                                         @RequestParam(value = "verifyCode", defaultValue = "1") int verifyCode
     ) {
         if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
+
+        // 校验验证码
+        boolean check = this.checkVerifyCode(user, goodsId, verifyCode);
+
+        if (!check)
+            return Result.error(CodeMsg.VERITF_FAIL);// 检验不通过，请求非法
+
         // 获取秒杀路径
         String path = seckillServiceApi.createSeckillPath(user, goodsId);
         // 向客户端回传随机生成的秒杀地址
@@ -194,17 +205,21 @@ public class SeckillController implements InitializingBean {
 
     @RequestMapping(value = "/verifyCode", method = RequestMethod.GET)
     @ResponseBody
-    public Result<String> getMiaoshaVerifyCode(HttpServletResponse response, SeckillUser user,
+    public Result<String> getSeckillVerifyCode(HttpServletResponse response, SeckillUser user,
                                                @RequestParam("goodsId") long goodsId) {
         if (user == null)
             return Result.error(CodeMsg.SESSION_ERROR);
 
         // 创建验证码
         try {
-            BufferedImage image = seckillServiceApi.createVerifyCode(user, goodsId);
+            VerifyCodeVo verifyCodeVo = VerifyCodeUtil.createVerifyCode();
+            log.info("验证码对象计算的值：{}" + verifyCodeVo.getExpResult());
+            //验证码结果存在redis中
+            redisServiceApi.set(SeckillKeyPrefix.seckillVerifyCode,
+                    user.getId() + "_" + goodsId, verifyCodeVo.getExpResult());
             ServletOutputStream out = response.getOutputStream();
             // 将图片写入到resp对象中
-            ImageIO.write(image, "JPEG", out);
+            ImageIO.write(verifyCodeVo.getImage(), "JPEG", out);
             out.close();
             out.flush();
             return null;
@@ -212,6 +227,32 @@ public class SeckillController implements InitializingBean {
             e.printStackTrace();
             return Result.error(CodeMsg.SECKILL_FAIL);
         }
+    }
+
+
+    /**
+     * 检验检验码的计算结果
+     *
+     * @param user
+     * @param goodsId
+     * @param verifyCode
+     * @return
+     */
+    private boolean checkVerifyCode(SeckillUser user, long goodsId, int verifyCode) {
+        if (user == null || goodsId <= 0) {
+            return false;
+        }
+
+        // 从redis中获取验证码计算结果
+        Integer oldCode = redisServiceApi.get(SeckillKeyPrefix.seckillVerifyCode, user.getId() + "_" + goodsId, Integer.class);
+        log.info("redis存储的计算结果：{},手动输入的计算结果：{}", oldCode, verifyCode);
+        if (oldCode == null || oldCode - verifyCode != 0) {// !!!!!!
+            return false;
+        }
+
+        // 如果校验成功，则说明校验码过期，删除校验码缓存，防止重复提交同一个验证码
+        redisServiceApi.delete(SeckillKeyPrefix.seckillVerifyCode, user.getId() + "_" + goodsId);
+        return true;
     }
 
 }

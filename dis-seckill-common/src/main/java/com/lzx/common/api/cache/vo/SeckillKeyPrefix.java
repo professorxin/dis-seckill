@@ -1,6 +1,8 @@
 package com.lzx.common.api.cache.vo;
 
-public class SeckillKeyPrefix extends BaseKeyPrefix {
+import java.io.Serializable;
+
+public class SeckillKeyPrefix extends BaseKeyPrefix implements Serializable {
 
 
     public SeckillKeyPrefix(String prefix) {

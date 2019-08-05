@@ -42,4 +42,12 @@ public class VerifyCodeVo implements Serializable {
     public void setExpResult(int expResult) {
         this.expResult = expResult;
     }
+
+    @Override
+    public String toString() {
+        return "VerifyCodeVo{" +
+                "image=" + image +
+                ", expResult=" + expResult +
+                '}';
+    }
 }

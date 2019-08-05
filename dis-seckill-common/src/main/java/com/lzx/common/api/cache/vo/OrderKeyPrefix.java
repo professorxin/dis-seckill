@@ -1,6 +1,8 @@
 package com.lzx.common.api.cache.vo;
 
-public class OrderKeyPrefix extends BaseKeyPrefix {
+import java.io.Serializable;
+
+public class OrderKeyPrefix extends BaseKeyPrefix implements Serializable {
 
     public OrderKeyPrefix(String prefix) {
         super(prefix);

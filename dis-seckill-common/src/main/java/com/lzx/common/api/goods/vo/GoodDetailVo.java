@@ -3,7 +3,9 @@ package com.lzx.common.api.goods.vo;
 
 import com.lzx.common.domain.SeckillUser;
 
-public class GoodDetailVo {
+import java.io.Serializable;
+
+public class GoodDetailVo implements Serializable {
 
     private int seckillStatus = 0;
     private int remainSeconds = 0;

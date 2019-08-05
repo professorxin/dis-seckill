@@ -9,7 +9,7 @@ public interface UserServiceApi {
 
     String COOKIE_NAME = "token";
 
-    String login(HttpServletResponse response, LoginVo loginVo) ;
+    String login(LoginVo loginVo) ;
 
     /**
      * 根据id查询秒杀用户信息
@@ -24,5 +24,4 @@ public interface UserServiceApi {
     boolean updatePassword(String token, long id, String updatePassword) ;
 
 
-    SeckillUser getByToken(HttpServletResponse response, String token) ;
 }

@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserServiceApi {
     @Reference
     private RedisServiceApi redisServiceApi;
 
-    public String login(HttpServletResponse response, LoginVo loginVo) {
+    public String login(LoginVo loginVo) {
         if (loginVo == null) {
             throw new GlobleException(CodeMsg.SERVER_ERROR);
         }
@@ -54,8 +54,8 @@ public class UserServiceImpl implements UserServiceApi {
             throw new GlobleException(CodeMsg.PASSWORD_ERROR);
         }
         String token = UUIDUtil.uuid();
-        addCookie(response, token, user);
-
+        //addCookie(response, token, user);
+        redisServiceApi.set(SeckillUserKeyPrefix.token, token, user);
         return token;
     }
 
@@ -101,17 +101,6 @@ public class UserServiceImpl implements UserServiceApi {
         return true;
     }
 
-    public SeckillUser getByToken(HttpServletResponse response, String token) {
-        //注意一点，public方法第一步校验参数是否为空
-        if (StringUtils.isEmpty(token)) {
-            return null;
-        }
-        SeckillUser seckillUser = redisServiceApi.get(SeckillUserKeyPrefix.token, token, SeckillUser.class);
-        if (seckillUser != null) {
-            addCookie(response, token, seckillUser);
-        }
-        return seckillUser;
-    }
 
     private void addCookie(HttpServletResponse response, String token, SeckillUser user) {
         redisServiceApi.set(SeckillUserKeyPrefix.token, token, user);

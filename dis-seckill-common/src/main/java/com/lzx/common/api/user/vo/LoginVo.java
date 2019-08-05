@@ -5,8 +5,9 @@ import com.lzx.common.validator.IsMobile;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class LoginVo {
+public class LoginVo implements Serializable {
 
     @NotNull
     @IsMobile

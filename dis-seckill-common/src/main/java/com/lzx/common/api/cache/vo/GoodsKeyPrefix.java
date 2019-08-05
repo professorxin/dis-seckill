@@ -1,6 +1,8 @@
 package com.lzx.common.api.cache.vo;
 
-public class GoodsKeyPrefix extends BaseKeyPrefix {
+import java.io.Serializable;
+
+public class GoodsKeyPrefix extends BaseKeyPrefix implements Serializable {
 
     public GoodsKeyPrefix(int expireSeconds, String prefix) {
         super(expireSeconds, prefix);

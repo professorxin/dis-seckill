@@ -1,9 +1,11 @@
 package com.lzx.common.api.cache.vo;
 
+import java.io.Serializable;
+
 /**
  * 访问次数的key前缀
  */
-public class AccessKeyPrefix extends BaseKeyPrefix {
+public class AccessKeyPrefix extends BaseKeyPrefix implements Serializable {
     public AccessKeyPrefix(String prefix) {
         super(prefix);
     }

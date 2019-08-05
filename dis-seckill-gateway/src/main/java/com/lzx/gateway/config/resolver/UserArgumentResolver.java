@@ -1,9 +1,10 @@
 package com.lzx.gateway.config.resolver;
 
-import com.lzx.seckill.access.UserContext;
-import com.lzx.seckill.domain.SeckillUser;
-import com.lzx.seckill.service.SeckillUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.lzx.common.api.user.UserServiceApi;
+import com.lzx.common.domain.SeckillUser;
+import com.lzx.gateway.config.access.UserContext;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
-    @Autowired
-    private SeckillUserService seckillUserService;
+    @Reference
+    private UserServiceApi seckillUserService;
 
     /**
      * 当请求参数中含有SeckillUser时，Controller中该对象是由下面的resolveArgument方法获得

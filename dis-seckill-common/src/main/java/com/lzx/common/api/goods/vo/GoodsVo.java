@@ -3,9 +3,10 @@ package com.lzx.common.api.goods.vo;
 import com.lzx.common.domain.Goods;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class GoodsVo extends Goods {
+public class GoodsVo extends Goods implements Serializable {
 
     private Double seckillPrice;
     private Integer stockCount;

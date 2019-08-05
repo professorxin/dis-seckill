@@ -1,6 +1,8 @@
 package com.lzx.common.api.cache.vo;
 
-public class SeckillUserKeyPrefix extends BaseKeyPrefix {
+import java.io.Serializable;
+
+public class SeckillUserKeyPrefix extends BaseKeyPrefix implements Serializable {
 
     public static final int TOKEN_EXPIRE = 3600 * 24 * 2;
 

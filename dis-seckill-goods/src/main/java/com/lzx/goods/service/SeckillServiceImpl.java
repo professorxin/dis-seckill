@@ -14,6 +14,8 @@ import com.lzx.common.util.MD5Util;
 import com.lzx.common.util.UUIDUtil;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import org.apache.dubbo.config.annotation.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.script.ScriptEngine;
@@ -25,6 +27,7 @@ import java.util.Random;
 @Service
 public class SeckillServiceImpl implements SeckillServiceApi {
 
+    private static final Logger log = LoggerFactory.getLogger(SeckillServiceImpl.class);
 
     @Reference
     private GoodsServiceApi goodsServiceApi;
@@ -101,7 +104,7 @@ public class SeckillServiceImpl implements SeckillServiceApi {
         if (user == null || goodsId <= 0) {
             return null;
         }
-        // 随机生成秒杀地址
+        //随机生成秒杀地址
         String path = MD5Util.md5(UUIDUtil.uuid() + "123456");
         // 将随机生成的秒杀地址存储在redis中（保证不同的用户和不同商品的秒杀地址是不一样的）
         redisServiceApi.set(SeckillKeyPrefix.seckillPath, "" + user.getId() + "_" + goodsId, path);

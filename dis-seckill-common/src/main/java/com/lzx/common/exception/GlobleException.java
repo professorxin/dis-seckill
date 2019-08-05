@@ -10,7 +10,6 @@ public class GlobleException extends RuntimeException {
     private CodeMsg cm;
 
     public GlobleException(CodeMsg cm) {
-        super(cm.toString());
         this.cm = cm;
     }
 

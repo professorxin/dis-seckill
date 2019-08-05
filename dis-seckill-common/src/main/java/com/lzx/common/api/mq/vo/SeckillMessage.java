@@ -3,7 +3,9 @@ package com.lzx.common.api.mq.vo;
 
 import com.lzx.common.domain.SeckillUser;
 
-public class SeckillMessage {
+import java.io.Serializable;
+
+public class SeckillMessage implements Serializable {
 
     private SeckillUser user;
 

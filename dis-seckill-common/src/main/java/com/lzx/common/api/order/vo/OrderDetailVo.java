@@ -4,12 +4,14 @@ package com.lzx.common.api.order.vo;
 import com.lzx.common.api.goods.vo.GoodsVo;
 import com.lzx.common.domain.OrderInfo;
 
+import java.io.Serializable;
+
 /**
  * 订单详情，包含订单信息和商品信息
  *
  *
  */
-public class OrderDetailVo {
+public class OrderDetailVo implements Serializable {
 
     private GoodsVo goods;// 商品信息
     private OrderInfo order; // 订单信息

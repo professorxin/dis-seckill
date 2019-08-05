@@ -1,6 +1,6 @@
 package com.lzx.gateway.user;
 
-import com.lzx.common.api.seckill.SeckillServiceApi;
+import com.lzx.common.api.cache.vo.SeckillUserKeyPrefix;
 import com.lzx.common.api.user.UserServiceApi;
 import com.lzx.common.api.user.vo.LoginVo;
 import com.lzx.common.result.Result;
@@ -11,14 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class UserController {
 
-    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Reference
     private UserServiceApi userServiceApi;
@@ -32,7 +33,11 @@ public class LoginController {
     @ResponseBody
     public Result<String> doLogin(HttpServletResponse response, @Valid LoginVo loginVo) {
         log.info(loginVo.toString());
-        String token = userServiceApi.login(response, loginVo);
+        String token = userServiceApi.login(loginVo);
+        Cookie cookie = new Cookie(UserServiceApi.COOKIE_NAME, token);
+        cookie.setPath("/");
+        cookie.setMaxAge(SeckillUserKeyPrefix.TOKEN_EXPIRE);
+        response.addCookie(cookie);
         return Result.success(token);
     }
 
