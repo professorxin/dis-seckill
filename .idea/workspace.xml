@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16f2c3dd-60e3-45de-9b97-aff6a3232079" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/dis-seckill-cache/src/main/java/com/lzx/cache/service/RedisLockImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/cache/RedisLockApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dis-seckill-gateway/src/main/java/com/lzx/gateway/seckill/SeckillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dis-seckill-gateway/src/main/java/com/lzx/gateway/seckill/SeckillController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dis-seckill-goods/src/main/java/com/lzx/goods/service/SeckillServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dis-seckill-goods/src/main/java/com/lzx/goods/service/SeckillServiceImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/dis-seckill-gateway/target/" />
@@ -24,11 +24,12 @@
     <session id="1530945488">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.2" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.2" value="4" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -38,7 +39,7 @@
           <entry key="htm" value="1" />
           <entry key="html" value="1" />
           <entry key="iml" value="4" />
-          <entry key="java" value="365" />
+          <entry key="java" value="372" />
           <entry key="js" value="1" />
           <entry key="pom" value="1" />
           <entry key="properties" value="37" />
@@ -51,7 +52,7 @@
           <entry key="CLASS" value="11" />
           <entry key="HTML" value="2" />
           <entry key="IDEA_MODULE" value="4" />
-          <entry key="JAVA" value="365" />
+          <entry key="JAVA" value="372" />
           <entry key="JavaScript" value="1" />
           <entry key="Properties" value="37" />
           <entry key="UML" value="1" />
@@ -61,16 +62,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="203" />
-          <entry key="java" value="2008" />
+          <entry key="java" value="2759" />
           <entry key="properties" value="72" />
-          <entry key="txt" value="31" />
+          <entry key="txt" value="44" />
           <entry key="xml" value="213" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2008" />
-          <entry key="PLAIN_TEXT" value="234" />
+          <entry key="JAVA" value="2759" />
+          <entry key="PLAIN_TEXT" value="247" />
           <entry key="Properties" value="72" />
           <entry key="XML" value="213" />
         </counts>
@@ -78,7 +79,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -104,8 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dis-seckill-cache/src/main/java/com/lzx/cache/config/RedisPoolFactory.java" />
-        <option value="$PROJECT_DIR$/dis-seckill-mq/src/main/java/com/lzx/mq/MqApplication.java" />
         <option value="$PROJECT_DIR$/dis-seckill-mq/src/main/java/com/lzx/mq/receiver/MQSender.java" />
         <option value="$PROJECT_DIR$/dis-seckill-mq/src/main/java/com/lzx/mq/service/MQSender.java" />
         <option value="$PROJECT_DIR$/dis-seckill-mq/src/main/java/com/lzx/mq/service/MQProviderImpl.java" />
@@ -155,6 +154,8 @@
         <option value="$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/util/VerifyCodeUtil.java" />
         <option value="$PROJECT_DIR$/dis-seckill-goods/src/main/java/com/lzx/goods/service/SeckillServiceImpl.java" />
         <option value="$PROJECT_DIR$/dis-seckill-gateway/src/main/java/com/lzx/gateway/seckill/SeckillController.java" />
+        <option value="$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/cache/RedisLockApi.java" />
+        <option value="$PROJECT_DIR$/dis-seckill-cache/src/main/java/com/lzx/cache/service/RedisLockImpl.java" />
       </list>
     </option>
   </component>
@@ -198,8 +199,6 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
     <option name="width" value="1540" />
     <option name="height" value="925" />
   </component>
@@ -210,6 +209,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -217,6 +217,61 @@
             <path>
               <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
               <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-cache" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-cache" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-cache" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-cache" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-cache" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-cache" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-cache" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
@@ -252,6 +307,27 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
@@ -371,6 +447,79 @@
             </path>
             <path>
               <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="mq" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="mq" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="mq" type="462c0819:PsiDirectoryNode" />
+              <item name="receiver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="mq" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dis-seckill" type="462c0819:PsiDirectoryNode" />
+              <item name="dis-seckill-mq" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dis-seckill" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -378,7 +527,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -388,8 +536,8 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1564994759758" />
-    <property name="last_opened_file_path" value="E:/SeckillProject/dis-seckill" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565264716153" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -512,10 +660,10 @@
       <item itemvalue="Spring Boot.UserApplication" />
       <item itemvalue="Spring Boot.OrderApplication" />
       <item itemvalue="Spring Boot.GoodsApplication" />
-      <item itemvalue="Application.GoodsApplication" />
-      <item itemvalue="Application.MyOver" />
       <item itemvalue="Spring Boot.CacheApplication" />
       <item itemvalue="Spring Boot.MqApplication" />
+      <item itemvalue="Application.GoodsApplication" />
+      <item itemvalue="Application.MyOver" />
       <item itemvalue="Application.VerifyCodeUtil" />
     </list>
     <recent_temporary>
@@ -539,7 +687,11 @@
       <workItem from="1564717127478" duration="9392000" />
       <workItem from="1564847477112" duration="1465000" />
       <workItem from="1564887705497" duration="17697000" />
-      <workItem from="1564967493212" duration="21887000" />
+      <workItem from="1564967493212" duration="23211000" />
+      <workItem from="1565068866051" duration="1000" />
+      <workItem from="1565068877454" duration="1297000" />
+      <workItem from="1565186589240" duration="90000" />
+      <workItem from="1565262894540" duration="2156000" />
     </task>
     <task id="LOCAL-00001" summary="所有模块构建完成">
       <created>1564972080358</created>
@@ -562,16 +714,23 @@
       <option name="project" value="LOCAL" />
       <updated>1564991369931</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="修改GoodsServiceApi注入空指针异常">
+      <created>1564994854133</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1564994854133</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50441000" />
+    <option name="totallyTimeSpent" value="55309000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25938338" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2727882" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -675,55 +834,18 @@
     <MESSAGE value="所有模块构建完成" />
     <MESSAGE value="修改配置" />
     <MESSAGE value="vo对象可序列化" />
-    <option name="LAST_COMMIT_MESSAGE" value="vo对象可序列化" />
+    <MESSAGE value="修改GoodsServiceApi注入空指针异常" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改GoodsServiceApi注入空指针异常" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/goods/vo/GoodDetailVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/goods/vo/GoodsVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/mq/vo/SeckillMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/order/vo/OrderDetailVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dis-seckill-gateway/src/main/java/com/lzx/gateway/GatewayApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#317#318#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -776,25 +898,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/user/vo/UserVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="5" column="15" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1078#1079#0" expanded="true" />
-            <element signature="e#1113#1114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/user/vo/UserVo.java" />
     <entry file="file://$PROJECT_DIR$/dis-seckill-gateway/src/main/java/com/lzx/gateway/config/access/AccessInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2200">
           <caret line="100" column="9" lean-forward="true" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -809,9 +917,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,20 +934,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/mq/MqProviderApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/order/OrderServiceApi.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -864,10 +959,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="65" column="10" selection-start-line="65" selection-start-column="10" selection-end-line="65" selection-end-column="10" />
-          <folding>
-            <element signature="e#1663#1664#0" expanded="true" />
-            <element signature="e#1693#1694#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -875,10 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="61" column="10" selection-start-line="61" selection-start-column="10" selection-end-line="61" selection-end-column="10" />
-          <folding>
-            <element signature="e#1598#1599#0" expanded="true" />
-            <element signature="e#1628#1629#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -886,9 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#240#241#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -896,9 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="35" column="40" lean-forward="true" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -913,9 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="45" column="41" lean-forward="true" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -930,9 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4">
           <caret line="21" column="23" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -940,9 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="234" column="26" selection-start-line="234" selection-start-column="16" selection-end-line="234" selection-end-column="26" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -950,9 +1022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -967,10 +1036,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
           <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding>
-            <element signature="e#148#149#0" expanded="true" />
-            <element signature="e#194#195#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -985,10 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="88" column="32" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
-          <folding>
-            <element signature="e#1532#1533#0" expanded="true" />
-            <element signature="e#1581#1582#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1027,9 +1088,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
           <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1037,9 +1095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1047,9 +1102,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="8" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,12 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="45" column="38" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="38" />
-          <folding>
-            <element signature="e#2494#2495#0" expanded="true" />
-            <element signature="e#2521#2522#0" expanded="true" />
-            <element signature="e#2551#2552#0" expanded="true" />
-            <element signature="e#2577#2578#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1084,9 +1130,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-249">
           <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1097,23 +1140,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dis-seckill-mq/src/main/java/com/lzx/mq/service/MqProviderImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dis-seckill-gateway/src/main/java/com/lzx/gateway/seckill/SeckillController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="2618">
+          <caret line="150" column="32" selection-start-line="150" selection-start-column="32" selection-end-line="150" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/mq/MqProviderApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dis-seckill-cache/src/main/java/com/lzx/cache/service/RedisServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="392">
+          <caret line="152" selection-start-line="152" selection-end-line="156" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="1073" column="19" selection-start-line="1073" selection-start-column="19" selection-end-line="1073" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dis-seckill-cache/src/main/java/com/lzx/cache/service/RedisLockImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dis-seckill-common/src/main/java/com/lzx/common/api/cache/RedisLockApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
