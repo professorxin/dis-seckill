@@ -52,11 +52,11 @@
 
     <div class="row">
         <div class="col-md-5">
-            <button class="btn btn-primary btn-block" type="reset" onclick="reset()">重置</button>
-        </div>
-        <div class="col-md-5">
             <!--login()是一个js脚本-->
             <button class="btn btn-primary btn-block" type="submit" onclick="login()">登录</button>
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-primary btn-block" type="reset" onclick="register()">注册</button>
         </div>
     </div>
 
@@ -64,7 +64,7 @@
 </body>
 
 <script>
-    function login(){
+    function login() {
         $("#loginForm").validate({
             submitHandler: function (form) {
                 doLogin();
@@ -72,7 +72,7 @@
         });
     }
 
-    function doLogin(){
+    function doLogin() {
 
         g_showLoading();
 
@@ -82,27 +82,32 @@
         var password = md5(str);
 
         $.ajax({
-            url:"/login/do_login",
-            type:"POST",
-            data:{
+            url: "/login/do_login",
+            type: "POST",
+            data: {
                 mobile: $("#mobile").val(),
                 password: password
             },
-            success:function (data) {
+            success: function (data) {
                 layer.closeAll();
-                if(data.code == 0){
+                if (data.code == 0) {
                     layer.msg("成功");
-                    window.location.href="/goods/to_list";
-                }else{
+                    window.location.href = "/goods/to_list";
+                } else {
                     layer.msg(data.msg)
                 }
                 console.log(data);
             },
-            error:function () {
+            error: function () {
                 layer.closeAll();
             }
         })
 
+    }
+
+    <!--注册-->
+    function register() {
+        window.location.href = "/user/doRegister";
     }
 </script>
 </html>

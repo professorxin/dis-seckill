@@ -13,6 +13,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,9 @@ import java.util.List;
 public class GoodsController {
 
     private Logger log = LoggerFactory.getLogger(GoodsController.class);
+
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Reference
     private UserServiceApi userServiceApi;

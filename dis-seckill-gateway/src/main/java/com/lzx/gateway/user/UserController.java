@@ -3,12 +3,17 @@ package com.lzx.gateway.user;
 import com.lzx.common.api.cache.vo.SeckillUserKeyPrefix;
 import com.lzx.common.api.user.UserServiceApi;
 import com.lzx.common.api.user.vo.LoginVo;
+import com.lzx.common.api.user.vo.RegisterVo;
+import com.lzx.common.result.CodeMsg;
 import com.lzx.common.result.Result;
+import com.lzx.gateway.exception.GlobleException;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
@@ -39,6 +44,23 @@ public class UserController {
         cookie.setMaxAge(SeckillUserKeyPrefix.TOKEN_EXPIRE);
         response.addCookie(cookie);
         return Result.success(token);
+    }
+
+    @RequestMapping(value = "doRegister", method = RequestMethod.GET)
+    public String doRegister() {
+        log.info("跳转到注册界面");
+        return "register";
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @ResponseBody
+    public Result<Boolean> register(RegisterVo registerVo) {
+        log.info("RegisterVo=" + registerVo);
+        if (registerVo == null) {
+            throw new GlobleException(CodeMsg.FILL_REGISTER_INFO);
+        }
+        CodeMsg codeMsg = userServiceApi.register(registerVo);
+        return Result.info(codeMsg);
     }
 
 }

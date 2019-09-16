@@ -1,16 +1,14 @@
 package com.lzx.user.dao;
 
 import com.lzx.common.domain.SeckillUser;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface SeckillUserDao {
 
     /**
      * 根据id查询秒杀用户信息
+     *
      * @param id
      * @return
      */
@@ -19,4 +17,8 @@ public interface SeckillUserDao {
 
     @Update("UPDATE seckill_user SET password = #{password} WHERE id = #{id}")
     void updatePassword(SeckillUser updateUser);
+
+
+    @Insert("INSERT INTO seckill_user (phone, nickname, password, salt, head, register_date, last_login_date, login_count) VALUES (#{phone}, #{nickname}, #{password}, #{salt}, #{head}, #{registerDate}, #{lastLoginDate}, #{loginCount}")
+    long insertUser(SeckillUser seckillUser);
 }

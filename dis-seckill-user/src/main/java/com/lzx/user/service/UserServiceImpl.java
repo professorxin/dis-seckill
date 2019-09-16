@@ -1,9 +1,11 @@
 package com.lzx.user.service;
 
+import com.lzx.common.api.cache.RedisLockApi;
 import com.lzx.common.api.cache.RedisServiceApi;
 import com.lzx.common.api.cache.vo.SeckillUserKeyPrefix;
 import com.lzx.common.api.user.UserServiceApi;
 import com.lzx.common.api.user.vo.LoginVo;
+import com.lzx.common.api.user.vo.RegisterVo;
 import com.lzx.common.domain.SeckillUser;
 import com.lzx.common.exception.GlobleException;
 import com.lzx.common.result.CodeMsg;
@@ -20,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserServiceApi {
@@ -33,6 +36,9 @@ public class UserServiceImpl implements UserServiceApi {
 
     @Reference
     private RedisServiceApi redisServiceApi;
+
+    @Reference
+    private RedisLockApi redisLockApi;
 
     public String login(LoginVo loginVo) {
         if (loginVo == null) {
@@ -99,6 +105,56 @@ public class UserServiceImpl implements UserServiceApi {
         seckillUser.setPassword(updateUser.getPassword());
         redisServiceApi.set(SeckillUserKeyPrefix.token, token, seckillUser);
         return true;
+    }
+
+    @Override
+    public CodeMsg register(RegisterVo userModel) {
+        //加锁
+        String uniqueValue = UUIDUtil.uuid() + "-" + Thread.currentThread().getId();
+        String lockKey = "redis-lock" + userModel.getPhone();
+        boolean lock = redisLockApi.lock(lockKey, uniqueValue, 60 * 1000);
+        if (!lock) {
+            return CodeMsg.WAIT_REGISTER_DONE;
+        }
+        log.debug("注册接口加锁成功");
+
+        //检查用户是否注册
+        SeckillUser user = this.getById(userModel.getPhone());
+        if (user != null) {
+            redisLockApi.unlock(lockKey, uniqueValue);
+            return CodeMsg.USER_EXIST;
+        }
+
+        //生成秒杀对象
+        SeckillUser seckillUser = new SeckillUser();
+        seckillUser.setId(userModel.getPhone());
+        seckillUser.setNickname(userModel.getNickname());
+        seckillUser.setHead(userModel.getHead());
+        seckillUser.setSalt(MD5Util.salt);
+
+        String dbPass = MD5Util.formPassToDbPass(userModel.getPassword(), MD5Util.salt);
+        seckillUser.setPassword(dbPass);
+
+        Date date = new Date(System.currentTimeMillis());
+        seckillUser.setRegisterDate(date);
+
+        //写入数据库
+        long id = seckillUserDao.insertUser(seckillUser);
+
+        boolean unlock = redisLockApi.unlock(lockKey, uniqueValue);
+        if (!unlock) {
+            return CodeMsg.REGISTER_FAIL;
+        }
+        log.debug("注册接口解锁成功");
+
+        //用户注册成功
+        if (id > 0) {
+            return CodeMsg.SUCCESS;
+        }
+
+        //用户注册失败
+        return CodeMsg.REGISTER_FAIL;
+
     }
 
 

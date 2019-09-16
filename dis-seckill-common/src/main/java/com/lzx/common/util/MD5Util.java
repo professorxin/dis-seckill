@@ -10,7 +10,7 @@ public class MD5Util {
 
 
     //第一次MD5加密的固定盐值
-    private static final String salt = "1a2b3c4d";
+    public static final String salt = "1a2b3c4d";
 
     /**
      * 用户输入密码MD5加密为表单密码
